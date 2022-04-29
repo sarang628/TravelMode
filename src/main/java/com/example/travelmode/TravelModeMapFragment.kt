@@ -6,16 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import com.example.screen_map.MapViewModel
-import com.example.torang_core.data.model.Filter
 import com.example.travelmode.databinding.FragmentTravelModeMapBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class TravelModeMapFragment : Fragment() {
-
-    /** 뷰모델 */
-    private val mViewModel: MapViewModel by activityViewModels()
 
     private val selectNationViewModel: SelectNationViewModel by activityViewModels()
 
@@ -42,7 +37,6 @@ class TravelModeMapFragment : Fragment() {
                 nationFragment.dismiss()
 
             it.nationLocation?.let { it ->
-                mViewModel.setLocation(it.lat, it.lon, 10f)
 
             }
 

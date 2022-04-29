@@ -19,9 +19,8 @@
         android:layout_height="match_parent"
         tools:context=".MainActivity">
 
-        <fragment
+        <FrameLayout
             android:id="@+id/fragment"
-            class="com.example.screen_map.MapsFragment"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:text="Hello World!"
