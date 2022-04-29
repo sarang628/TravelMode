@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="nationItem"
+            type="com.example.torang_core.data.NationItem" />
+
+        <variable
+            name="viewModel"
+            type="com.example.travelmode.SelectNationViewModel" />
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="center_vertical"
+        android:onClick="@{()->viewModel.select(nationItem)}"
+        android:paddingLeft="10dp">
+
+        <include
+            layout="@layout/item_nation1"
+            app:name="@{nationItem.name}"
+            app:res="@{nationItem.res}" />
+
+    </LinearLayout>
+</layout>
