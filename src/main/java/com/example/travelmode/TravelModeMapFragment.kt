@@ -6,20 +6,19 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
 import com.example.travelmode.databinding.FragmentTravelModeMapBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
+import androidx.lifecycle.repeatOnLifecycle
+import com.example.torang_core.util.Logger
+import kotlinx.coroutines.flow.collect
 
 @AndroidEntryPoint
 class TravelModeMapFragment : Fragment() {
-
-    private val selectNationViewModel: SelectNationViewModel by activityViewModels()
-
-    //private val filterViewModel: FilterViewModel by activityViewModels()
-
+    private val viewModel: SelectNationViewModel by activityViewModels()
     private val nationFragment = SelectNationFragment()
-
-    /** 공유 뷰모델 */
-    //private val mapSharedViewModel: MapSharedViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,15 +29,18 @@ class TravelModeMapFragment : Fragment() {
         binding.constraintLayout.setOnClickListener {
             nationFragment.show(childFragmentManager, "dialog")
         }
-        //binding.mapShareViewModel = mapSharedViewModel
 
-        selectNationViewModel.selected.observe(viewLifecycleOwner) {
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.RESUMED) {
+                viewModel.selectedNation.collect {
+                    Logger.d(it.toString())
+                }
+            }
+        }
+
+        viewModel.selected.observe(viewLifecycleOwner) {
             if (nationFragment.isVisible)
                 nationFragment.dismiss()
-
-            it.nationLocation?.let { it ->
-
-            }
 
             it?.let {
                 /*if (it.nationBound == null) {
@@ -63,11 +65,10 @@ class TravelModeMapFragment : Fragment() {
             }
         }
 
-        selectNationViewModel.restaurants.observe(viewLifecycleOwner) {
-
+        viewModel.restaurants.observe(viewLifecycleOwner) {
         }
 
-        binding.viewModel = selectNationViewModel
+        binding.viewModel = viewModel
         return binding.root
     }
 }

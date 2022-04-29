@@ -41,18 +41,14 @@ dependencies {
     implementation project(path: ':TorangRepository')
     implementation project(path: ':torang_core')
 
-    /** google map */
-    implementation 'com.google.maps.android:android-maps-utils:0.6.1'
-    implementation 'com.google.android.gms:play-services-maps:17.0.0'
-    implementation 'com.google.android.gms:play-services-location:17.1.0'
-
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    /** UI architecture */
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycleVersion"
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$archLifecycleVersion"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$archLifecycleVersion"
 
     /** common */
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation "androidx.core:core-ktx:$ktxVersion"
     implementation "androidx.appcompat:appcompat:$appCompatVersion"
     implementation "com.google.android.material:material:$materialVersion"
@@ -63,6 +59,14 @@ dependencies {
 
     /** by viewmodes */
     implementation "androidx.fragment:fragment-ktx:$fragmentVersion"
+    implementation 'androidx.activity:activity-ktx:1.1.0'
+
+    /** NAVIGATION COMPONENT */
+    implementation "androidx.navigation:navigation-fragment-ktx:$navigationVersion" // Kotlin
+    implementation "androidx.navigation:navigation-ui-ktx:$navigationVersion" // Kotlin
+    implementation "androidx.navigation:navigation-dynamic-features-fragment:$navigationVersion" // Feature module Support
+    androidTestImplementation "androidx.navigation:navigation-testing:$navigationVersion" // Testing Navigation
+    implementation "androidx.navigation:navigation-compose:$navigationVersion" // Jetpack Compose Integration
 
     /** HILT */
     implementation "com.google.dagger:hilt-android:$hiltVersion"

@@ -23,12 +23,17 @@ class SelectNationViewModel @Inject constructor(private val nationRepository: Na
     }
     val selected: LiveData<NationItem> = _selectdNation
 
+    val selectedNation = nationRepository.getSelectNationItem()
+
     /** 현재 맛집 리스트 */
     private val _restaurants = MutableLiveData<List<RestaurantData>>()
     val restaurants: LiveData<List<RestaurantData>> = _restaurants
 
     fun select(nationItem: NationItem) {
         _selectdNation.postValue(nationItem)
+        viewModelScope.launch {
+            nationRepository.selectNationItem(nationItem)
+        }
     }
 
     fun findRestaurant(
