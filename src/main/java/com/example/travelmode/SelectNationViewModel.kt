@@ -7,9 +7,12 @@ import androidx.lifecycle.viewModelScope
 import com.example.torang_core.data.NationBound
 import com.example.torang_core.data.NationItem
 import com.example.torang_core.data.NationLocation
+import com.example.torang_core.data.data.Location
+import com.example.torang_core.data.location
 import com.example.torang_core.data.model.Filter
 import com.example.torang_core.data.model.RestaurantData
 import com.example.torang_core.data.model.SearchType
+import com.example.torang_core.repository.MapRepository
 import com.example.torang_core.repository.NationRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
@@ -17,7 +20,10 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class SelectNationViewModel @Inject constructor(private val nationRepository: NationRepository) :
+class SelectNationViewModel @Inject constructor(
+    private val nationRepository: NationRepository,
+    private val mapRepository: MapRepository
+) :
     ViewModel() {
     private val _selectdNation = MutableLiveData<NationItem>().apply {
         value = NationItem(R.drawable.southkorea, "Korea")
@@ -34,6 +40,9 @@ class SelectNationViewModel @Inject constructor(private val nationRepository: Na
         _selectdNation.postValue(nationItem)
         viewModelScope.launch {
             nationRepository.selectNationItem(nationItem)
+            nationItem.nationLocation?.let {
+                mapRepository.setCurrentLocation(it.location())
+            }
         }
     }
 
