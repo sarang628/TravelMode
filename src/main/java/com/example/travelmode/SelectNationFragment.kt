@@ -28,13 +28,4 @@ class SelectNationFragment : BottomSheetDialogFragment() {
 
         return binding.root
     }
-
-    companion object {
-
-        /*nationFragment.show(childFragmentManager, "dialog")
-
-
-        if (nationFragment.isVisible)
-        nationFragment.dismiss()*/
-    }
 }

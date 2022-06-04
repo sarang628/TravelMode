@@ -326,17 +326,7 @@ class SelectNationViewModel @Inject constructor(private val nationRepository: Na
                 )
             )
             this?.add(
-                NationItem(
-                    R.drawable.southkorea,
-                    "south korea",
-                    NationLocation(37.55136363234369, 126.99115206585131),
-                    NationBound(
-                        latitudeNorthEast = 37.964334513417114,
-                        latitudeSouthWest = 37.13609172066124,
-                        longitudeNorthEast = 127.26081646978855,
-                        longitudeSouthWest = 126.72148760408164
-                    )
-                )
+                NationItemData.KOREA()
             )
             this?.add(
                 NationItem(
